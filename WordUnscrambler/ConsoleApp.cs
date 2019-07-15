@@ -16,23 +16,36 @@ namespace WordUnscrambler
         IDictionary<string, string> menuOptions = new Dictionary<string, string>();
 
         // --------------------------------------------------------------------- PRINTING UTILITY FUNCTIONS
-        public void Write(string message)
+        private void PrintIndent()
         {
             string indentString = "";
 
             for (int i = 0; i < indent; i++) indentString += " ";
-            Console.Write(indentString + message);
+            Console.Write(indentString);
         }
-        public void WriteLine(string message)
+        public void Write(string message = "")
         {
-            string indentString = "";
-
-            for (int i = 0; i < indent; i++) indentString += " ";
-            Console.WriteLine(indentString + message);
+            PrintIndent();
+            Console.Write(message);
+        }
+        public void WriteLine(string message = "")
+        {
+            PrintIndent();
+            Console.WriteLine(message);
         }
         private string ToTitleCase(string str)
         {
             return new CultureInfo("en").TextInfo.ToTitleCase(str.ToLower());
+        }
+        // --------------------------------------------------------------------- USER INPUT FUNCTIONS
+        public string Read()
+        {
+            return Console.ReadLine();
+        }
+        public string ReadLine()
+        {
+            PrintIndent();
+            return Console.ReadLine();
         }
 
         // --------------------------------------------------------------------- MENU MANIPULATION

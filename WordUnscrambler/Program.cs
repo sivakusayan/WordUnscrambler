@@ -38,7 +38,8 @@ namespace WordUnscrambler
 
         static void ManualWordUnscrambler()
         {
-            
+            app.Write("Enter a comma separated list of words (Ex: apple,pear,orange): ");
+            app.Read();
         }
 
         static void RunWordUnscrambler()
