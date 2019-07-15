@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WordUnscrambler
 {
-    class ConsoleMenu
+    class ConsoleApp
     {
         public ConsoleColor menuOptionColor { get; set; } = ConsoleColor.White;
         public int indent { get; set; } = 4;
@@ -16,14 +16,14 @@ namespace WordUnscrambler
         IDictionary<string, string> menuOptions = new Dictionary<string, string>();
 
         // --------------------------------------------------------------------- PRINTING UTILITY FUNCTIONS
-        private void print(string message)
+        public void Write(string message)
         {
             string indentString = "";
 
             for (int i = 0; i < indent; i++) indentString += " ";
             Console.Write(indentString + message);
         }
-        private void printLine(string message)
+        public void WriteLine(string message)
         {
             string indentString = "";
 
@@ -45,7 +45,7 @@ namespace WordUnscrambler
         public void PrintMenuOption(string key)
         {
             Console.ForegroundColor = menuOptionColor;
-            print(ToTitleCase(key));
+            Write(ToTitleCase(key));
             Console.ResetColor();
             Console.WriteLine($" - {menuOptions[key]}");
         }
@@ -59,11 +59,11 @@ namespace WordUnscrambler
         // --------------------------------------------------------------------- MENU INPUT
         public string AskMenuOption()
         {
-            print("Enter a menu option: ");
+            Write("Enter a menu option: ");
             string option = Console.ReadLine();
             while (!menuOptions.ContainsKey(option.ToLower()))
             {
-                print("Please enter a valid option: ");
+                Write("Please enter a valid option: ");
                 option = Console.ReadLine();
             }
             return option;
@@ -71,11 +71,11 @@ namespace WordUnscrambler
 
         public bool AskContinue()
         {
-            print("Would you like to continue? (Y/N): ");
+            Write("Would you like to continue? (Y/N): ");
             string option = Console.ReadLine();
             while (!option.ToUpper().Equals("Y") && !option.ToUpper().Equals("N"))
             {
-                print("Please enter a valid option: ");
+                Write("Please enter a valid option: ");
                 option = Console.ReadLine();
             }
 

@@ -8,13 +8,13 @@ namespace WordUnscrambler
 {
     class Program
     {
-        static ConsoleMenu menu = new ConsoleMenu();
+        static ConsoleApp app = new ConsoleApp();
 
         static void init()
         {
-            menu.menuOptionColor = ConsoleColor.Green;
-            menu.SetMenuOption("F", "Submit words by file");
-            menu.SetMenuOption("M", "Submit words manually");
+            app.menuOptionColor = ConsoleColor.Green;
+            app.SetMenuOption("F", "Submit words by file");
+            app.SetMenuOption("M", "Submit words manually");
         }
 
         static void exit()
@@ -22,13 +22,34 @@ namespace WordUnscrambler
             System.Environment.Exit(1);
         }
 
+        static void doMenuOption(string option)
+        {
+            switch (option.ToUpper())
+            {
+                case "F":
+                    break;
+                case "M":
+                    ManualWordUnscrambler();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        static void ManualWordUnscrambler()
+        {
+            
+        }
+
         static void RunWordUnscrambler()
         {
-            menu.PrintMenu();
-            string input = menu.AskMenuOption();
+            app.PrintMenu();
+            string input = app.AskMenuOption();
+
+            doMenuOption(input);
 
             Console.WriteLine();
-            if (menu.AskContinue()) RunWordUnscrambler();
+            if (app.AskContinue()) RunWordUnscrambler();
             
         }
         static void Main(string[] args)
