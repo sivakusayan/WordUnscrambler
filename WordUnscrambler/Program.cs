@@ -16,11 +16,25 @@ namespace WordUnscrambler
             menu.SetMenuOption("F", "Submit words by file");
             menu.SetMenuOption("M", "Submit words manually");
         }
+
+        static void exit()
+        {
+            System.Environment.Exit(1);
+        }
+
+        static void RunWordUnscrambler()
+        {
+            menu.PrintMenu();
+            string input = menu.AskMenuOption();
+
+            Console.WriteLine();
+            if (menu.AskContinue()) RunWordUnscrambler();
+            
+        }
         static void Main(string[] args)
         {
             init();
-            menu.PrintMenu();
-            menu.AskMenuOption();
+            RunWordUnscrambler();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace WordUnscrambler
         public int indent { get; set; } = 4;
 
 
-        IDictionary<string, string> options = new Dictionary<string, string>();
+        IDictionary<string, string> menuOptions = new Dictionary<string, string>();
 
         // --------------------------------------------------------------------- PRINTING UTILITY FUNCTIONS
         private void print(string message)
@@ -38,7 +38,7 @@ namespace WordUnscrambler
         // --------------------------------------------------------------------- MENU MANIPULATION
         public void SetMenuOption(string key, string description)
         {
-            options.Add(key.ToLower(), description);
+            menuOptions.Add(key.ToLower(), description);
         }
 
         // --------------------------------------------------------------------- MENU PRINTING
@@ -47,12 +47,12 @@ namespace WordUnscrambler
             Console.ForegroundColor = menuOptionColor;
             print(ToTitleCase(key));
             Console.ResetColor();
-            Console.WriteLine($" - {options[key]}");
+            Console.WriteLine($" - {menuOptions[key]}");
         }
         public void PrintMenu()
         {
             Console.WriteLine();
-            foreach (string key in options.Keys) PrintMenuOption(key);
+            foreach (string key in menuOptions.Keys) PrintMenuOption(key);
             Console.WriteLine();
         }
 
@@ -61,12 +61,25 @@ namespace WordUnscrambler
         {
             print("Enter a menu option: ");
             string option = Console.ReadLine();
-            while (!options.ContainsKey(option.ToLower()))
+            while (!menuOptions.ContainsKey(option.ToLower()))
             {
                 print("Please enter a valid option: ");
                 option = Console.ReadLine();
             }
             return option;
+        }
+
+        public bool AskContinue()
+        {
+            print("Would you like to continue? (Y/N): ");
+            string option = Console.ReadLine();
+            while (!option.ToUpper().Equals("Y") && !option.ToUpper().Equals("N"))
+            {
+                print("Please enter a valid option: ");
+                option = Console.ReadLine();
+            }
+
+            return option.ToUpper().Equals("Y");
         }
     }
 }
