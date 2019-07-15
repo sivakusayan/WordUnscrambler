@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WordUnscrambler
 {
-    class WordUnscrambler
+    public class Unscrambler
     {
         public string[] wordList { private get; set; }
 

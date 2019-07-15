@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WordUnscrambler
 {
-    class ConsoleApp
+    public class ConsoleApp
     {
         public ConsoleColor menuOptionColor { get; set; } = ConsoleColor.White;
         public int indent { get; set; } = 4;
