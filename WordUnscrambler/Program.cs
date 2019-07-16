@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.IO;
 
 namespace WordUnscrambler
@@ -19,7 +20,16 @@ namespace WordUnscrambler
             app.menuOptionColor = ConsoleColor.Green;
             app.SetMenuOption("F", "Submit words by file");
             app.SetMenuOption("M", "Submit words manually");
-            unscrambler.unscrambledWordList = File.ReadAllLines(UnscrambledWordsFilePath);
+            try
+            {
+                unscrambler.unscrambledWordList = File.ReadAllLines(UnscrambledWordsFilePath);
+            } catch
+            {
+                app.WriteLine("Sorry, we cannot initialize the unscrambled word list. (Did you check the file path?)");
+                app.WriteLine("Shutting down...");
+                Thread.Sleep(7000);
+                Exit();
+            }
         }
 
         static void LoadWordList()
@@ -37,6 +47,7 @@ namespace WordUnscrambler
             switch (option.ToUpper())
             {
                 case "F":
+                    FileWordUnscrambler();
                     break;
                 case "M":
                     ManualWordUnscrambler();
@@ -53,6 +64,20 @@ namespace WordUnscrambler
             string[] wordList = app.Read().Split(',');
 
             UnscrambleList(wordList);
+        }
+
+        static void FileWordUnscrambler()
+        {
+            app.NewPage();
+            app.Write("Enter a file path of scrambled words (Ex: scrambledWords.txt): ");
+            try
+            {
+                string[] wordList = File.ReadAllLines(app.Read());
+                UnscrambleList(wordList);
+            } catch
+            {
+                app.WriteLine("Sorry, we cannot detect that file path.");
+            }
         }
 
         static void UnscrambleList(string[] scrambledWords)
