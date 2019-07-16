@@ -8,7 +8,7 @@ namespace WordUnscrambler
 {
     public class Unscrambler
     {
-        public string[] wordList { private get; set; }
+        public string[] unscrambledWordList { get; set; }
 
         private bool IsPermutation(string str1, string str2)
         {
@@ -17,14 +17,14 @@ namespace WordUnscrambler
             IDictionary<char, int> characterCount = new Dictionary<char, int>();
 
             // Establish character counts for first string
-            foreach (char character in str1.ToLower().ToCharArray())
+            foreach (char character in str1.ToCharArray())
             {
                 if (!characterCount.ContainsKey(character)) characterCount[character] = 0;
                 characterCount[character] += 1;
             }
 
             // Subtract off character counts for second string
-            foreach (char character in str2.ToLower().ToCharArray())
+            foreach (char character in str2.ToCharArray())
             {
                 if (!characterCount.ContainsKey(character)) return false;
                 characterCount[character] -= 1;
@@ -37,11 +37,13 @@ namespace WordUnscrambler
 
         public string[] GetMatches(string str)
         {
-            foreach (string word in wordList)
-            {
+            List<string> matchList = new List<string>();
 
+            foreach (string word in unscrambledWordList)
+            {
+                if (IsPermutation(word.ToLower(), str.ToLower())) matchList.Add(word);
             }
-            return wordList;
+            return matchList.ToArray<string>();
         }
     }
 }

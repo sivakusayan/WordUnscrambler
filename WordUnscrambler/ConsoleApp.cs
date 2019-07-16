@@ -37,6 +37,12 @@ namespace WordUnscrambler
         {
             return new CultureInfo("en").TextInfo.ToTitleCase(str.ToLower());
         }
+
+        public void NewPage()
+        {
+            Console.Clear();
+            Console.WriteLine();
+        }
         // --------------------------------------------------------------------- USER INPUT FUNCTIONS
         public string Read()
         {
@@ -64,7 +70,6 @@ namespace WordUnscrambler
         }
         public void PrintMenu()
         {
-            Console.WriteLine();
             foreach (string key in menuOptions.Keys) PrintMenuOption(key);
             Console.WriteLine();
         }
