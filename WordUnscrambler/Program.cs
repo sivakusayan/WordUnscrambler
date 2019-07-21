@@ -32,11 +32,6 @@ namespace WordUnscrambler
             }
         }
 
-        static void LoadWordList()
-        {
-
-        }
-
         static void Exit()
         {
             System.Environment.Exit(1);
